@@ -41,6 +41,7 @@ https://muhammad-lanang-tendangstore.pbp.cs.ui.ac.id/
 
 ## 📑 Quick Access
 - [7️⃣ Jawaban Tugas Individu 7](#7️⃣-jawaban-tugas-individu-7)
+- [8️⃣ Jawaban Tugas Individu 8](#8️⃣-jawaban-tugas-individu-8)
 
 ---
 
@@ -115,3 +116,10 @@ Hot reload digunakan saat kita hanya mengubah tampilan atau layout, sementara ho
 Dengan hot reload, proses development kode menjadi lebih cepat, efisien, dan interaktif dan tentu memudahkan programmer, karena kita tidak perlu menjalankan ulang aplikasi untuk setiap perubahan kecil.  
 
 ---
+
+## 8️⃣ Jawaban Tugas Individu 8
+
+### Question:  
+
+
+### Answer:  

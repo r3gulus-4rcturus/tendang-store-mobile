@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tendang_store/widgets/left_drawer.dart';
 
-
 class ProductFormPage extends StatefulWidget {
   const ProductFormPage({super.key});
 
@@ -37,11 +36,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text(
-            'Form Tambah Produk',
-          ),
-        ),
+        title: const Center(child: Text('Form Tambah Produk')),
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
@@ -52,7 +47,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children:[
+            children: [
               // === Name ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -73,6 +68,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     if (value == null || value.isEmpty) {
                       return "Nama Produk tidak boleh kosong!";
                     }
+                    if (value.length > 255) {
+                      return "Nama Produk tidak boleh melebihi 255 karakter!";
+                    }
                     return null;
                   },
                 ),
@@ -90,10 +88,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   ),
                   keyboardType: TextInputType.number, // numeric keyboard
                   onChanged: (value) {
-                    int? number = int.tryParse(value); 
+                    int? number = int.tryParse(value);
                     if (number != null) {
                       setState(() {
-                        _price = number; 
+                        _price = number;
                       });
                     }
                   },
@@ -103,6 +101,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     }
                     if (int.tryParse(value) == null) {
                       return "Harga harus berupa angka!";
+                    }
+                    if (int.tryParse(value)! < 0) {
+                      return "Harga harus berupa angka positif!";
                     }
                     return null;
                   },
@@ -128,6 +129,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     if (value == null || value.isEmpty) {
                       return "Brand tidak boleh kosong!";
                     }
+                    if (value.length > 255) {
+                      return "Nama Brand tidak boleh melebihi 30 karakter!";
+                    }
                     return null;
                   },
                 ),
@@ -145,10 +149,10 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   ),
                   keyboardType: TextInputType.number, // numeric keyboard
                   onChanged: (value) {
-                    int? number = int.tryParse(value); 
+                    int? number = int.tryParse(value);
                     if (number != null) {
                       setState(() {
-                        _price = number; 
+                        _price = number;
                       });
                     }
                   },
@@ -158,6 +162,9 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     }
                     if (int.tryParse(value) == null) {
                       return "Stok harus berupa angka!";
+                    }
+                    if (int.tryParse(value)! < 0) {
+                      return "Stok harus berupa angka positif!";
                     }
                     return null;
                   },
@@ -200,11 +207,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   ),
                   value: _category,
                   items: _categories
-                      .map((cat) => DropdownMenuItem(
-                            value: cat,
-                            child: Text(
-                                cat[0].toUpperCase() + cat.substring(1)),
-                          ))
+                      .map(
+                        (cat) => DropdownMenuItem(
+                          value: cat,
+                          child: Text(cat[0].toUpperCase() + cat.substring(1)),
+                        ),
+                      )
                       .toList(),
                   onChanged: (String? newValue) {
                     setState(() {
@@ -254,8 +262,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.indigo),
+                      backgroundColor: MaterialStateProperty.all(Colors.indigo),
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -266,8 +273,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                               title: const Text('Berita berhasil disimpan!'),
                               content: SingleChildScrollView(
                                 child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('Nama: $_name'),
                                     Text('Harga: $_price'),
@@ -277,7 +283,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
                                     Text('Kategori: $_category'),
                                     Text('Thumbnail: $_thumbnail'),
                                     Text(
-                                        'Unggulan: ${_isFeatured ? "Ya" : "Tidak"}'),
+                                      'Unggulan: ${_isFeatured ? "Ya" : "Tidak"}',
+                                    ),
                                   ],
                                 ),
                               ),
@@ -305,7 +312,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
             ],
           ),
         ),
-      )
+      ),
     );
   }
 }
