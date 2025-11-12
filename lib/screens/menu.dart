@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tendang_store/item_card.dart';
-import 'package:tendang_store/left_drawer.dart';
+import 'package:tendang_store/widgets/item_card.dart';
+import 'package:tendang_store/widgets/left_drawer.dart';
 
 class MyHomePage extends StatelessWidget {
     MyHomePage({super.key}); //sudah ada pada code sebelumnya

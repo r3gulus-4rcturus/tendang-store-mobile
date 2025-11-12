@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tendang_store/menu.dart';
-import 'package:tendang_store/product_form.dart';
+import 'package:tendang_store/screens/menu.dart';
+import 'package:tendang_store/screens/product_form.dart';
 
 class ItemCard extends StatelessWidget {
   // Menampilkan kartu dengan ikon dan nama.
