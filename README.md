@@ -120,6 +120,41 @@ Dengan hot reload, proses development kode menjadi lebih cepat, efisien, dan int
 ## 8️⃣ Jawaban Tugas Individu 8
 
 ### Question:  
-
+Jelaskan perbedaan antara `Navigator.push()` dan `Navigator.pushReplacement()` pada Flutter. Dalam kasus apa sebaiknya masing-masing digunakan pada aplikasi Football Shop kamu?
 
 ### Answer:  
+`Navigator.push()` digunakan untuk **menambahkan halaman baru di atas halaman sebelumnya**, sehingga pengguna masih bisa **kembali ke halaman sebelumnya** menggunakan tombol back. Sedangkan `Navigator.pushReplacement()` akan **mengganti halaman saat ini dengan halaman baru**, jadi halaman lama **tidak bisa dikembalikan lagi**.  
+
+Dalam konteks aplikasi saya, `Navigator.push()` cocok digunakan saat pengguna **berpindah antar halaman yang masih bisa dikunjungi kembali**, seperti dari halaman utama ke halaman form produk. Sementara `Navigator.pushReplacement()` lebih cocok untuk **navigasi satu arah**, misalnya setelah pengguna mengklik home, pengguna langsung diarahkan ke halaman utama tanpa bisa kembali ke halaman sebelumnya.  
+
+---
+
+### Question:  
+Bagaimana kamu memanfaatkan hierarchy widget seperti `Scaffold`, `AppBar`, dan `Drawer` untuk membangun struktur halaman yang konsisten di seluruh aplikasi?
+
+### Answer:  
+Saya memanfaatkan hierarchy widget ini untuk membuat **struktur halaman yang rapi dan konsisten** di seluruh aplikasi. `Scaffold` menjadi kerangka utama setiap halaman, karena di dalamnya saya bisa menambahkan elemen-elemen seperti `AppBar`, `Drawer`, dan `Body`. `AppBar` saya gunakan untuk menampilkan **judul halaman** dan **ikon navigasi**, sedangkan `Drawer` berfungsi sebagai menu samping agar pengguna bisa berpindah ke halaman lain seperti *Halaman Utama*, atau *Tam* dengan mudah.
+
+---
+
+### Question:  
+Dalam konteks desain antarmuka, apa kelebihan menggunakan layout widget seperti `Padding`, `SingleChildScrollView`, dan `ListView` saat menampilkan elemen-elemen form? Berikan contoh penggunaannya dari aplikasi kamu.
+
+### Answer:  
+Widget seperti `Padding`, `SingleChildScrollView`, dan `ListView` sangat membantu untuk membuat **tampilan form yang nyaman dan responsif**.  
+
+- `Padding` memberikan **ruang di sekitar elemen**, supaya tidak menempel di tepi layar dan terlihat lebih rapi.  
+- `SingleChildScrollView` memungkinkan halaman form **bisa discroll**, terutama ketika form panjang dan layar pengguna kecil.  
+- `ListView` berguna kalau kita punya **banyak elemen form dinamis** yang disusun vertikal, karena sudah otomatis mendukung scrolling dan manajemen layout yang efisien.  
+
+Contohnya di aplikasi **Football Shop**, saat membuat halaman *Product Form*, saya membungkus semua `TextFormField` di dalam `SingleChildScrollView`, lalu memberi `Padding` di sekelilingnya agar jaraknya pas dan tidak terlihat sempit.  
+
+---
+
+### Question:  
+Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?
+
+### Answer:  
+Saya menyesuaikan warna tema dengan menggunakan **`ThemeData`** di dalam `MaterialApp`. Dari situ, saya menentukan **primaryColor** nya. Selain itu, saya juga menjaga konsistensi warna di seluruh widget seperti tombol (`ElevatedButton`), ikon, dan `AppBar`. Saya memberi warna dengan hex 0xFF3E75E3.
+
+---

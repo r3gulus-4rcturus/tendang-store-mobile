@@ -30,8 +30,8 @@ class MyApp extends StatelessWidget {
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue
-        ).copyWith(secondary: Colors.blueAccent[400]),
+          primarySwatch:Colors.blue
+        ).copyWith(secondary: const Color(0xFF3E75E3)),
        ),
       home: MyHomePage(),
     );

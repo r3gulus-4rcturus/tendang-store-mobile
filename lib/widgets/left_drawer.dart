@@ -12,7 +12,7 @@ class LeftDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Color(0xFF3E75E3),
             ),
             child: Column(
               children: [
@@ -61,7 +61,7 @@ class LeftDrawer extends StatelessWidget {
               Buatlah routing ke ProductFromPage di sini,
               setelah halaman ProductFromPage sudah dibuat.
               */
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ProductFormPage(),
