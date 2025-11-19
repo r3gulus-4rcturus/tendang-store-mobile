@@ -238,26 +238,26 @@ Jelaskan mekanisme autentikasi login, register, dan logout pada Flutter–Django
 Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 ### Answer:  
-1. Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.  
+1. **Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.**
 Di settings.py, saya membuat konfigurasi CORS agar server django dapat menerima request dari flutter. Saya juga menambahkan 10.0.2.2 pada allowed host. Kemudian, saya membuat application baru bernama 'authentication' yang berfungsi sebagai API login, logout, register untuk aplikasi flutter saya. Saya juga membuat endpoint create_product_flutter di main/views.py sebagai API create product dari flutter. Terakhir, saya membuat endpoint proxy_image untuk menangani permasalahan CORS pada gambar.
 
-2. Mengimplementasikan fitur registrasi akun pada proyek tugas Flutter.  
+2. **Mengimplementasikan fitur registrasi akun pada proyek tugas Flutter.**
 Saya membuat register.dart pada directory /screen sebagai tampilan halaman register. Saya membuat tiga TextFormField untuk menampung tiga field yaitu username, password1, dan password2. Terakhir, pada submit button, saya melakukan request POST ke endpoint /auth/register pada server django yang telah saya deploy di pws.
 
-3. Membuat halaman login pada proyek tugas Flutter.  
+3. **Membuat halaman login pada proyek tugas Flutter.**
 Saya membuat login.dart pada directory /screen sebagai tampilan halaman login. Saya membuat duaTextFormField untuk menampung username dan password. Terakhir, pada submit button, saya melakukan request POST ke endpoint /auth/login pada server django yang telah saya deploy di pws.
 
-4. Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.  
+4. **Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.**
 Pertama-tama, saya melakukan instalasi package provider dan juga pbp_django_auth. Kemudian di main.dart, saya mengimplementasikan Provider sehingga seluruh komponen saya dapat mengakses dan menyimpan cookies lewat instance CookieRequest. Jika di suatu komponen saya membutuhkan cookies tersebut, saya tinggal menambahkan konfigurasi context.watch<CookieRequest>() pada variabel request.
 
-5. Membuat model kustom sesuai dengan proyek aplikasi Django.  
+5. **Membuat model kustom sesuai dengan proyek aplikasi Django.**
 Saya membuat model product_entry pada directory /models untuk menyimpan field apa saja yang ada pada model product. Saya menggunakan website app.quicktype.io untuk generate model berdasarkan contoh JSON dari product.
 
-6. Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy. Tampilkan name, price, description, thumbnail, category, dan is_featured dari masing-masing item pada halaman ini (Dapat disesuaikan dengan field yang kalian buat sebelumnya).  
+6. **Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.** Tampilkan name, price, description, thumbnail, category, dan is_featured dari masing-masing item pada halaman ini (Dapat disesuaikan dengan field yang kalian buat sebelumnya).  
 Saya membuat product_entry_list.dart pada directory /screen sebagai tampilan halaman yang berisi daftar semua produk. Untuk mengambil data JSON dari semua produk, saya cukup melakukan fetching ke endpoint /json yang telah saya buat pada tugas yang lalu di server django saya. Setelah fetching, saya kemudian melakukan build widget ProductEntryCard untuk tiap produk. Widget ini terletak di product_entry_card.dart pada directory /widgets da berfungsi untuk menampilkan data untuk setiap produk. 
 
-7. Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item. Halaman ini dapat diakses dengan menekan salah satu card item pada halaman daftar Item. Tampilkan seluruh atribut pada model item kamu pada halaman ini. Tambahkan tombol untuk kembali ke halaman daftar item.  
+7. **Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item. Halaman ini dapat diakses dengan enekan salah satu card item pada halaman daftar Item. Tampilkan seluruh atribut pada model item kamu pada halaman ini Tambahkan tombol untuk kembali ke halaman daftar item.**
 Saya membuat product_detail.dart pada directory /screen sebagai tampilan halaman yang berisi detail dari suatu produk. Pada halaman daftar item tadi, saya menambahkan Navigator.push() pada atribut onTap pada itemBuilder agar jika masing-masing card product bila diklik akan melakukan navigasi menuju halaman product_detail.dart. Data produk tidak didapat melalui fetching, tetapi dari data produk yang ada pada halaman daftar item. 
 
-8. Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.  
+8. **Melakukan filter pada halaman daftar item dengan hanya menampilkan item yang terasosiasi dengan pengguna yang login.**  
 Saya memodifikasi endpoint /json di server django untuk melakukan filter apabila terdapat query parameter filter=mine. Saya juga memodifikasi product_entry_list.dart di /screens dengan menambahkan dua button, dimana masing-masing button akan mengubah state filter (all atau mine). Jika tombol My Products ditekan, maka data akan difetch ulang dengan query params filter=mine.
