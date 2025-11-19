@@ -42,6 +42,7 @@ https://muhammad-lanang-tendangstore.pbp.cs.ui.ac.id/
 ## 📑 Quick Access
 - [7️⃣ Jawaban Tugas Individu 7](#7️⃣-jawaban-tugas-individu-7)
 - [8️⃣ Jawaban Tugas Individu 8](#8️⃣-jawaban-tugas-individu-8)
+- [9️⃣ Jawaban Tugas Individu 9](#9️⃣-jawaban-tugas-individu-8)
 
 ---
 
@@ -158,3 +159,75 @@ Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki iden
 Saya menyesuaikan warna tema dengan menggunakan **`ThemeData`** di dalam `MaterialApp`. Dari situ, saya menentukan **primaryColor** nya. Selain itu, saya juga menjaga konsistensi warna di seluruh widget seperti tombol (`ElevatedButton`), ikon, dan `AppBar`. Saya memberi warna dengan hex 0xFF3E75E3.
 
 ---
+
+## 9️⃣ Jawaban Tugas Individu 9
+
+### Question:  
+Jelaskan mengapa kita perlu membuat model Dart saat mengambil/mengirim data JSON? Apa konsekuensinya jika langsung memetakan `Map<String, dynamic>` tanpa model?
+
+### Answer:  
+Model Dart diperlukan agar data yang diterima atau dikirim memiliki **struktur yang jelas**, **type safety**, dan lebih mudah dalam maintenance.
+
+Jika hanya memakai `Map<String, dynamic>`:
+- Error berupa salah key atau salah tipe baru terdeteksi saat runtime.
+- Null-check harus dilakukan manual.
+- Jika struktur JSON berubah, banyak kode lain ikut terdampak.
+
+Dengan model:
+- Kesalahan tipe terdeteksi lebih awal.
+- Field bisa dibuat `required`.
+- Perubahan cukup di satu tempat (`fromJson()`).
+
+---
+
+### Question:  
+Apa fungsi package `http` dan `CookieRequest`? Mengapa instance `CookieRequest` perlu dibagikan ke semua komponen?
+
+### Answer:  
+- `http` → melakukan request HTTP dasar.  
+- `CookieRequest` → mengelola login, session cookie, dan CSRF untuk Django.
+
+Instance `CookieRequest` harus dibagikan ke semua komponen karena ia menyimpan **status autentikasi**. Semua halaman harus memakai instance yang sama agar autentikasi konsisten (semua request-response menggunakan sessionid yang sama contohnya).
+
+---
+
+### Question:  
+Jelaskan konfigurasi konektivitas agar Flutter bisa berkomunikasi dengan Django. Apa akibatnya jika salah?
+
+### Answer:  
+- **`10.0.2.2` di `ALLOWED_HOSTS`** = agar emulator bisa akses server lokal. Jika salah: Django akan menolak request dari instance flutter.  
+- **CORS** = agar request lintas domain diizinkan. Jika salah: request dari flutter diblokir browser.  
+- **SameSite/Cookie** = agar session & CSRF tidak diblokir. Jika salah: login/CSRF (saat submit add product) gagal.  
+- **Izin internet Android** = agar aplikasi bisa mengakses jaringan. Jika salah: koneksi gagal total.
+
+---
+
+### Question:  
+Jelaskan mekanisme pengiriman data dari input hingga tampil di Flutter.
+
+### Answer:  
+1. Pengguna mengisi dan memvalidasi form.  
+2. Data dikirim ke Django via `request.postJson()`.  
+3. Django menyimpan data dan mengirim respons sukses.  
+4. Flutter kembali ke halaman utama.  
+5. Halaman daftar memuat data terbaru melalui `fetchProduct()` dan menampilkannya.
+
+---
+
+### Question:  
+Jelaskan mekanisme autentikasi login, register, dan logout pada Flutter–Django.
+
+### Answer:  
+- **Register**: Flutter mengirim data => Django membuat akun => kembali ke halaman login.  
+- **Login**: Flutter mengirim kredensial => Django membuat session => `CookieRequest` menyimpan cookie => masuk ke halaman utama.  
+- **Logout**: Flutter memanggil logout => Django menghapus session => cookie dihapus => kembali ke halaman login.
+
+---
+
+### Question:  
+Jelaskan mekanisme autentikasi login, register, dan logout pada Flutter–Django.
+
+### Answer:  
+- **Register**: Flutter mengirim data => Django membuat akun => kembali ke halaman login.  
+- **Login**: Flutter mengirim kredensial => Django membuat session => `CookieRequest` menyimpan cookie => masuk ke halaman utama.  
+- **Logout**: Flutter memanggil logout => Django menghapus session => cookie dihapus => kembali ke halaman login.
