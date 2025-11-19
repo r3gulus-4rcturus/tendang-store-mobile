@@ -134,7 +134,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     if (value == null || value.isEmpty) {
                       return "Brand tidak boleh kosong!";
                     }
-                    if (value.length > 255) {
+                    if (value.length > 30) {
                       return "Nama Brand tidak boleh melebihi 30 karakter!";
                     }
                     return null;
@@ -274,18 +274,21 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         // TODO: Replace the URL with your app's URL
                         // To connect Android emulator with Django on localhost, use URL http://10.0.2.2/
                         // If you using chrome,  use URL http://localhost:8000
-
+                        String _isFeaturedString = "";
+                        if (_isFeatured) {
+                          _isFeaturedString = "on";
+                        }
                         final response = await request.postJson(
                           "https://muhammad-lanang-tendangstore.pbp.cs.ui.ac.id/create-flutter/",
                           jsonEncode({
-                            "name":_name,
-                            "price":_price,
-                            "description":_description,
-                            "thumbnail":_thumbnail,
-                            "category":_category,
-                            "is_featured":_isFeatured,
-                            "stock":_stock,
-                            "brand":_brand
+                            "name": _name,
+                            "price": _price,
+                            "description": _description,
+                            "thumbnail": _thumbnail,
+                            "category": _category,
+                            "is_featured": _isFeaturedString,
+                            "stock": _stock,
+                            "brand": _brand,
                           }),
                         );
                         if (context.mounted) {
@@ -302,11 +305,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
                               ),
                             );
                           } else {
+                            String errorMessage =
+                                response['message'] ??
+                                "Something went wrong, please try again.";
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                  "Something went wrong, please try again.",
-                                ),
+                              SnackBar(
+                                content: Text(errorMessage),
                               ),
                             );
                           }

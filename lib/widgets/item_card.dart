@@ -52,7 +52,7 @@ class ItemCard extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => ProductEntryListPage(),
+                builder: (context) => ProductEntryListPage(initialFilter: ProductFilter.mine),
               )
             );
           }
