@@ -56,7 +56,7 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
   // WIDGET FOR FILTER BUTTONS
   Widget _buildFilterButton(ProductFilter filter, String text) {
     bool isSelected = _currentFilter == filter;
-    return ElevatedButton(
+    return TextButton( 
       onPressed: () {
         if (!isSelected) {
           // Trigger a refetch by updating the state
@@ -65,16 +65,27 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
           });
         }
       },
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         backgroundColor: isSelected
-            ? Colors.blue.shade700
-            : Colors.grey.shade300,
-        foregroundColor: isSelected ? Colors.white : Colors.black,
-        elevation: isSelected ? 5 : 1,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            ? Colors.indigo.shade50 
+            : Colors.transparent,
+        foregroundColor: isSelected 
+            ? Color(0xFF3E75E3)
+            : Colors.grey.shade700,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20), 
+          side: isSelected
+              ? BorderSide(color: Colors.indigo.shade300, width: 1.5) 
+              : BorderSide(color: Colors.grey.shade300), 
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+        ),
+      ),
     );
   }
 
@@ -82,15 +93,22 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     return Scaffold(
-      appBar: AppBar(title: const Text('Product Entry List')),
+      appBar: AppBar(
+        title: const Text(
+          'Product Catalogue',
+          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF3E75E3),),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 1,
+        iconTheme: const IconThemeData(color: Color(0xFF3E75E3),),
+      ),
       drawer: const LeftDrawer(),
       body: Column(
         children: [
-          // FILTER BUTTONS
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _buildFilterButton(ProductFilter.all, "All Products"),
                 const SizedBox(width: 10),
@@ -107,17 +125,38 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
                   return const Center(child: CircularProgressIndicator());
                 } else {
                   if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Column(
-                      children: [
-                        Text(
-                          'There are no product yet.',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Color(0xff59A5D8),
+                    return Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            _currentFilter == ProductFilter.mine
+                                ? Icons.person_off_outlined
+                                : Icons.inventory_2_outlined,
+                            size: 60,
+                            color: const Color(0xFF3E75E3),
                           ),
-                        ),
-                        SizedBox(height: 8),
-                      ],
+                          const SizedBox(height: 16),
+                          Text(
+                            _currentFilter == ProductFilter.mine
+                                ? 'You haven\'t added any products yet.'
+                                : 'No products found in the catalogue.',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey.shade600,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                             _currentFilter == ProductFilter.mine
+                                ? 'Tap the "+" button to create one.'
+                                : '',
+                             style: TextStyle(color: Colors.grey.shade500),
+                          ),
+                        ],
+                      ),
                     );
                   } else {
                     return ListView.builder(
@@ -125,7 +164,6 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
                       itemBuilder: (_, index) => ProductEntryCard(
                         product: snapshot.data![index],
                         onTap: () {
-                          // Navigate to product detail page
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -144,7 +182,6 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
           ),
         ],
       ),
-      // ----------------------------------------
     );
   }
 }

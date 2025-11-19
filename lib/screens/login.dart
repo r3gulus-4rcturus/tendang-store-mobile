@@ -19,9 +19,9 @@ class LoginApp extends StatelessWidget {
       title: 'Login',
       theme: ThemeData(
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSwatch(
-          primarySwatch: Colors.blue,
-        ).copyWith(secondary: Colors.blueAccent[400]),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF3E75E3),
+        ),
       ),
       home: const LoginPage(),
     );
@@ -111,9 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                         jsonEncode({
                           "username": username,
                           "password": password,
-                        })
+                        }),
                       );
-                        
+
                       if (request.loggedIn) {
                         String message = response['message'];
                         String uname = response['username'];

@@ -18,7 +18,7 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Detail'),
-        backgroundColor: Colors.indigo,
+        backgroundColor: const Color(0xFF3E75E3),
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
